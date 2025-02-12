@@ -1,0 +1,12 @@
+aws ecr create-repository --repository-name moondispenser
+aws ecs register-task-definition --cli-input-json file://ecs-task-definition.json --region us-east-1
+aws ecs create-service \    --cluster moon-dispenser-cluster \            
+    --service-name moon-dispenser-service \
+    --task-definition moon-dispenser-task \
+    --desired-count 1 \
+    --launch-type FARGATE --network-configuration "awsvpcConfiguration={subnets=[xxxxxx],securityGroups=[xxxxxx],assignPublicIp=ENABLED}"
+create security_group rule to allow inbound traffic for port number to your ip address
+
+dhwanwanjara@Dhwans-MBP MoonDispenser % aws ecs update-service \    --cluster moon-dispenser-cluster \            
+    --service moon-dispenser-service \
+    --force-new-deployment

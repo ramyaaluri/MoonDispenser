@@ -1,0 +1,57 @@
+{
+    "family": "moon-dispenser-task",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+      {
+        "name": "moon-dispenser-container",
+        "image": "686255956204.dkr.ecr.us-east-1.amazonaws.com/moondispenser:latest",
+        "cpu": 256,
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000,
+            "protocol": "tcp"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/moon-dispenser",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "moon-dispenser"
+          }
+        }
+      },
+      {
+        "name": "moon-dispenser-front-end-container",
+        "image": "686255956204.dkr.ecr.us-east-1.amazonaws.com/moondispenserfe:latest",
+        "cpu": 256,
+        "memory": 512,
+        "essential": true,
+        "portMappings": [
+          {
+            "containerPort": 3000,
+            "hostPort": 3000,
+            "protocol": "tcp"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/moon-dispenser-fe",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "moon-dispenser"
+          }
+        }
+      }
+    ],
+    "requiresCompatibilities": [
+      "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::686255956204:role/NaqshaECSExecutionRole",
+    "taskRoleArn": "arn:aws:iam::686255956204:role/NaqshaECSTaskRole"
+  }

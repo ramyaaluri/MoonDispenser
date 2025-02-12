@@ -9,7 +9,7 @@ import logging
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:3000"])
 # MongoDB connection setup
-client = MongoClient('mongodb://localhost:27017/')  # Replace with your MongoDB URI if hosted
+client = MongoClient('mongodb+srv://Cluster97193:XUZKXV9qR3ly@cluster97193.kzhvl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster97193')  # Replace with your MongoDB URI if hosted
 # Database and collection
 db = client['pad_dispenser_db']
 machines_collection = db['machines']
@@ -80,7 +80,7 @@ def register_machine():
         result = machines_collection.insert_one(machine)
         logging.debug(f"Insert result: {result.inserted_id}")  # Log the inserted ID to confirm the insertion
 
-    return jsonify({"message": "Machine not registered successfully!"}), 201
+    return jsonify({"message": "Machine registered successfully!"}), 201
 
 
 # Route to update pad count
