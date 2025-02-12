@@ -9,8 +9,7 @@ import logging
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:3000"])
 # MongoDB connection setup
-client = MongoClient('mongodb+srv://Cluster97193:XUZKXV9qR3ly@cluster97193.kzhvl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster97193')  # Replace with your MongoDB URI if hosted
-# Database and collection
+client = MongoClient('mongodb://localhost:27017/') # Database and collection
 db = client['pad_dispenser_db']
 machines_collection = db['machines']
 
